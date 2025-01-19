@@ -1,13 +1,14 @@
 # Games
 
-**TODO: Add more games.
+**TODO: Add more games.\n
 Better documentation
 **
 
 ## Installation
 
-Simply unpackage within your linux shell find your way to the Games directory and enter iex -s mix 
-Once in the iex shell Games.start() to play your games.
+Simply unpackage within your linux shell.\n 
+Find your way to the Games directory and enter iex -s mix\n 
+Once in the iex shell enter: Games.start()
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 by adding `games` to your list of dependencies in `mix.exs`:
