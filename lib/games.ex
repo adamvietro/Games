@@ -1,5 +1,7 @@
 defmodule Games do
   @moduledoc """
+  Start the hub with Games.start()
+
   This will be the hub for choosing a game.
 
   Current games are:
@@ -8,7 +10,7 @@ defmodule Games do
   """
 
   @doc """
-
+  Not sure what to put here...
   """
   def game_validate(choice) do
     current_games = ["rockpaperscissors", "guessinggame"]
