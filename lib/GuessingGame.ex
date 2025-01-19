@@ -1,4 +1,10 @@
-defmodule GuessingGame do
+defmodule Games.GuessingGame do
+  @moduledoc """
+  This is the module for the Guessing game.
+
+  This is meant to have a user guess a random number from
+  1 - 10
+  """
   def random_number() do
     Enum.random(1..10) |> Integer.to_string()
   end
