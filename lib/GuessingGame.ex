@@ -5,6 +5,28 @@ defmodule Games.GuessingGame do
   This is meant to have a user guess a random number from
   1 - 10
   """
+
+  @doc """
+  Enter your guess: 10
+  Too high!
+  Enter your guess: 9
+  Too high!
+  Enter your guess: 8
+  Too high!
+  Enter your guess: 7
+  Too high!
+  Enter your guess: 6
+  Too high!
+  Enter your guess: 5
+  You lose! the answer was 4
+
+  Enter your guess: 10
+  Too High!
+  Enter your guess: 5
+  Too Low!
+  Enter your guess: 7
+  Correct!
+  """
   def random_number() do
     Enum.random(1..10) |> Integer.to_string()
   end
