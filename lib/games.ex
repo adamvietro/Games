@@ -3,37 +3,38 @@ defmodule Games do
   This will be a guessing game that will have a user guess a number from
   1 - 10
   """
+  alias Logger.Backends.Internal
 
   @doc """
 
   """
-  def user_input do
-    IO.gets("Guess a number between 1 and 10:")
-  end
-
-  # def user_input(false) do
-  #   IO.gets("Incorrect!\n Enter your guess:")
-  # end
-
-  def user_input(false) do
-    "Inncorrect!"
-  end
-
-  def user_input(true) do
-    "You win!"
-  end
-
   def random_number() do
-    Enum.random(1..10)
+    Enum.random(1..10) |> Integer.to_string()
+  end
+
+  def user_input do
+    IO.gets("Guess a number between 1 and 10: ") |> String.trim()
+  end
+
+  def user_input_incorrect do
+    IO.gets("Incorrect!\nEnter your guess: ") |> String.trim()
+  end
+
+  def test_guess(guess, answer) do
+    cond do
+      guess == answer -> "You win!"
+      guess != answer ->
+        guess = user_input_incorrect()
+        test_guess(guess, answer)
+    end
   end
 
   def play do
     answer = random_number()
     guess = user_input()
+    # IO.inspect(answer, label: "answer")
+    # IO.inspect(guess, label: "guess")
 
-    cond do
-      guess == answer -> user_input(true)
-      true -> user_input(false)
-    end
+    test_guess(guess, answer)
   end
 end
