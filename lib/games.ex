@@ -7,13 +7,14 @@ defmodule Games do
   Current games are:
     RockPaperScissors
     GuessingGame
+    Wordle
   """
 
   @doc """
   Not sure what to put here...
   """
   def game_validate(choice) do
-    current_games = ["rockpaperscissors", "guessinggame"]
+    current_games = ["rockpaperscissors", "guessinggame", "wordle"]
 
     if choice in current_games do
       choice
@@ -25,6 +26,7 @@ defmodule Games do
   def choose_game do
     IO.gets("Please choose a game:
     Rock Paper Scissors
+    Wordle
     Guessing Game\n")
     |> string_normalization()
     |> game_validate()
@@ -62,6 +64,7 @@ defmodule Games do
     cond do
       game == "guessinggame" -> Games.GuessingGame.play()
       game == "rockpaperscissors" -> Games.RockPaperScissors.play()
+      game == "wordle" -> Games.Wordle.play()
 
     end
     play_again?()
