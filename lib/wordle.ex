@@ -93,7 +93,7 @@ defmodule Games.Wordle do
   def play do
     answer = word_generator()
     guess = user_guess()
-    guesses_left = 6
+    guesses_left = 5
     play_loop(answer, guess, guesses_left)
   end
 
@@ -108,7 +108,7 @@ defmodule Games.Wordle do
         feedback(answer, guess)
 
       guesses_left == 0 ->
-        IO.puts("Ran out of guesses")
+        IO.puts("Ran out of guesses... The word was #{answer}.")
     end
   end
 end
