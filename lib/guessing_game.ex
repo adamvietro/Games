@@ -7,50 +7,49 @@ defmodule Games.GuessingGame do
   """
 
   @doc """
-  Enter your guess: 10
-  Too high!
-  Enter your guess: 9
-  Too high!
-  Enter your guess: 8
-  Too high!
-  Enter your guess: 7
-  Too high!
-  Enter your guess: 6
-  Too high!
-  Enter your guess: 5
-  You lose! the answer was 4
-
-  Enter your guess: 10
-  Too High!
-  Enter your guess: 5
-  Too Low!
-  Enter your guess: 7
-  Correct!
+  Sets a random number.
   """
+  @spec random_number() :: String.t()
   def random_number() do
     Enum.random(1..10) |> Integer.to_string()
   end
 
+  @doc """
+  Asks the user for a number from 1 - 10.
+  """
+  @spec user_guess() :: String.t()
   def user_guess do
     IO.gets("Guess a number between 1 and 10: ") |> String.trim()
   end
 
+  @doc """
+  Selects a random number of guesses.
+  """
+  @spec number_of_guesses() :: integer()
   def number_of_guesses do
     Enum.random(1..5)
   end
 
-  # def user_input_incorrect do
-  #   IO.gets("Incorrect!\nEnter your guess: ") |> String.trim()
-  # end
-
+  @doc """
+  Tells the user that their guess is too low.
+  """
+  @spec too_low() :: any()
   def too_low do
     IO.gets("Too low!\nEnter your guess: ") |> String.trim()
   end
 
+  @doc """
+  Tells the user that their guess is too high.
+  """
+  @spec too_high() :: any()
   def too_high do
     IO.gets("Too high!\nEnter your guess: ") |> String.trim()
   end
 
+  @doc """
+  Test the users guess against the answer.
+  """
+  @spec test_guess(String.t(), String.t(), integer()) :: any()
   def test_guess(guess, answer, number_of) do
     cond do
       guess == answer ->
@@ -69,6 +68,10 @@ defmodule Games.GuessingGame do
     end
   end
 
+  @doc """
+  Starts the guessing game.
+  """
+  @spec play() :: any()
   def play do
     IO.puts(
       "Let's play a game. I'll pick a number and a random number of guesses, can you figure it out?"
