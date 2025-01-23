@@ -4,17 +4,16 @@ defmodule WordleTest do
   use ExUnit.Case
 
   describe "feedback/2" do
-    test "\"aaaaa\", \"aaaaa\"" do
-      Games.Wordle.feedback("aaaaa", "aaaaa") == [:green, :green, :green, :green, :green]
+    test "correct guess" do
+      assert Games.Wordle.feedback("aaaaa", "aaaaa") == [:green, :green, :green, :green, :green]
     end
 
-    test "\"aaaaa\", \"aaaab\"" do
-      Games.Wordle.feedback("aaaaa", "aaaab") == [:green, :green, :green, :green, :grey]
+    test "partial test" do
+      assert Games.Wordle.feedback("aaaaa", "aaaab") == [:green, :green, :green, :green, :grey]
     end
 
-    test "\"abdce\", \"edcba\"" do
-      Games.Wordle.feedback("abdce", "edcba") == [:yellow, :yellow, :yellow, :yellow, :yellow]
+    test "within but not full match" do
+      assert Games.Wordle.feedback("abdce", "edcba") == [:yellow, :yellow, :yellow, :yellow, :yellow]
     end
   end
-
 end
