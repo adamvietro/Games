@@ -99,7 +99,7 @@ defmodule Games.Wordle do
   @doc """
   Starts the Wordle game.
   """
-  @spec play() :: any()
+  @spec play() :: :ok
   def play do
     answer = word_generator()
     guess = user_guess()

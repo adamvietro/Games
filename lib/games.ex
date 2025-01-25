@@ -13,6 +13,7 @@ defmodule Games do
   @doc """
   Not sure what to put here...
   """
+  @spec game_validate(String.t()) :: :ok
   def game_validate(choice) do
     current_games = ["rockpaperscissors", "guessinggame", "wordle"]
 
@@ -23,6 +24,7 @@ defmodule Games do
     end
   end
 
+  @spec choose_game() :: String.t()
   def choose_game do
     IO.gets("Please choose a game:
     Rock Paper Scissors
@@ -32,6 +34,7 @@ defmodule Games do
     |> game_validate()
   end
 
+  @spec again_validate(String.t()) :: :ok
   def again_validate(choice) do
     again_choices = ["y", "n"]
 
@@ -42,23 +45,25 @@ defmodule Games do
     end
   end
 
+  @spec play_again?() :: :ok
   def play_again? do
     choice = IO.gets("Would you like to play an other game? y/n\n")
     choice = string_normalization(choice)
     choice = again_validate(choice)
 
     if choice == "y" do
-      start()
+      main(nil)
     end
   end
 
+  @spec string_normalization(String.t()) :: String.t()
   def string_normalization(string) do
     String.trim(string)
     |> String.downcase()
     |> String.replace(" ", "")
   end
 
-  def start do
+  def main(_args) do
     game = choose_game()
     game_validate(game)
     cond do
