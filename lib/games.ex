@@ -14,7 +14,7 @@ defmodule Games do
   Not sure what to put here...
   """
   @spec game_validate(String.t()) :: :ok
-  def game_validate(choice) do
+  defp game_validate(choice) do
     current_games = ["rockpaperscissors", "guessinggame", "wordle"]
 
     if choice in current_games do
@@ -25,7 +25,7 @@ defmodule Games do
   end
 
   @spec choose_game() :: String.t()
-  def choose_game do
+  defp choose_game do
     IO.gets("Please choose a game:
     Rock Paper Scissors
     Wordle
@@ -35,7 +35,7 @@ defmodule Games do
   end
 
   @spec again_validate(String.t()) :: :ok
-  def again_validate(choice) do
+  defp again_validate(choice) do
     again_choices = ["y", "n"]
 
     if choice in again_choices do
@@ -57,7 +57,7 @@ defmodule Games do
   end
 
   @spec string_normalization(String.t()) :: String.t()
-  def string_normalization(string) do
+  defp string_normalization(string) do
     String.trim(string)
     |> String.downcase()
     |> String.replace(" ", "")

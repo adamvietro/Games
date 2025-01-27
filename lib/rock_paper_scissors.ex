@@ -8,7 +8,7 @@ defmodule Games.RockPaperScissors do
   Picks a random choice for the computer.
   """
   @spec computer_choice() :: String.t()
-  def computer_choice do
+  defp computer_choice do
     Enum.random(["rock", "paper", "scissors"])
   end
 
@@ -16,7 +16,7 @@ defmodule Games.RockPaperScissors do
   Asks a user for their choice and validates the choice.
   """
   @spec user_choice() :: String.t()
-  def user_choice do
+  defp user_choice do
     valid_choices = ["rock", "paper", "scissors"]
     input = IO.gets("Choose rock, paper, or scissors: ") |> String.trim() |> String.downcase()
 
@@ -31,7 +31,7 @@ defmodule Games.RockPaperScissors do
   Checks the users choice against a table of winning choice combinations.
   """
   @spec table_check(String.t(), String.t()) :: any()
-  def table_check(player, computer) do
+  defp table_check(player, computer) do
     winning_pairs = [["rock", "scissors"], ["scissors", "paper"], ["paper", "rock"]]
 
     if [player, computer] in winning_pairs do
@@ -47,12 +47,12 @@ defmodule Games.RockPaperScissors do
   Tests the user choice against the computers choice.
   """
   @spec winner?(String.t(), String.t()) :: any()
-  def winner?(equal, equal) do
+  defp winner?(equal, equal) do
     IO.puts("it's a tie!")
   end
 
   @spec winner?(String.t(), String.t()) :: any()
-  def winner?(player, computer) do
+  defp winner?(player, computer) do
     table_check(player, computer)
   end
 

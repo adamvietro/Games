@@ -10,7 +10,7 @@ defmodule Games.GuessingGame do
   Sets a random number.
   """
   @spec random_number() :: String.t()
-  def random_number() do
+  defp random_number() do
     Enum.random(1..10) |> Integer.to_string()
   end
 
@@ -26,7 +26,7 @@ defmodule Games.GuessingGame do
   Selects a random number of guesses.
   """
   @spec number_of_guesses() :: integer()
-  def number_of_guesses do
+  defp number_of_guesses do
     Enum.random(1..5)
   end
 
@@ -34,7 +34,7 @@ defmodule Games.GuessingGame do
   Tells the user that their guess is too low.
   """
   @spec too_low() :: any()
-  def too_low do
+  defp too_low do
     IO.gets("Too low!\nEnter your guess: ") |> String.trim()
   end
 
@@ -42,7 +42,7 @@ defmodule Games.GuessingGame do
   Tells the user that their guess is too high.
   """
   @spec too_high() :: any()
-  def too_high do
+  defp too_high do
     IO.gets("Too high!\nEnter your guess: ") |> String.trim()
   end
 
@@ -50,7 +50,7 @@ defmodule Games.GuessingGame do
   Test the users guess against the answer.
   """
   @spec test_guess(String.t(), String.t(), integer()) :: any()
-  def test_guess(guess, answer, number_of) do
+  defp test_guess(guess, answer, number_of) do
     cond do
       guess == answer ->
         IO.puts("You win!")
