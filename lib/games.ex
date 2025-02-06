@@ -12,7 +12,7 @@ defmodule Games do
 
   @spec game_validate(String.t()) :: :ok
   defp game_validate(choice) do
-    current_games = ["rockpaperscissors", "guessinggame", "wordle"]
+    current_games = ["1", "2", "3", "score", "stop"]
 
     if choice in current_games do
       choice
@@ -23,34 +23,21 @@ defmodule Games do
 
   @spec choose_game() :: String.t()
   defp choose_game do
-    IO.gets("Please choose a game:
-    Rock Paper Scissors
-    Wordle
-    Guessing Game\n")
+    IO.gets("What game would you like to play?
+    1. Guessing Game
+    2. Rock Paper Scissors
+    3. Wordle
+
+    enter \"stop\" to exit
+    enter \"score\" to view your current score
+    \n")
     |> string_normalization()
     |> game_validate()
   end
 
-  @spec again_validate(String.t()) :: :ok
-  defp again_validate(choice) do
-    again_choices = ["y", "n"]
-
-    if choice in again_choices do
-      choice
-    else
-      play_again?()
-    end
-  end
-
-  @spec play_again?() :: :ok
-  defp play_again? do
-    choice = IO.gets("Would you like to play an other game? y/n\n")
-    choice = string_normalization(choice)
-    choice = again_validate(choice)
-
-    if choice == "y" do
-      main(nil)
-    end
+  defp display_score() do
+    current_score = ScoreTracker.get_score()
+    IO.puts("==================================================\nYour score is #{current_score} \n================================================== \n")
   end
 
   @spec string_normalization(String.t()) :: String.t()
@@ -61,14 +48,43 @@ defmodule Games do
   end
 
   def main(_args) do
+    if GenServer.whereis(__MODULE__) do
+      0
+    else
+      ScoreTracker.start_link(0)
+    end
+
     game = choose_game()
     game_validate(game)
-    cond do
-      game == "guessinggame" -> Games.GuessingGame.play()
-      game == "rockpaperscissors" -> Games.RockPaperScissors.play()
-      game == "wordle" -> Games.Wordle.play()
 
+    case game do
+      "1" ->
+        if Games.GuessingGame.play() do
+          ScoreTracker.add_score(5)
+        end
+
+        main(nil)
+
+      "2" ->
+        if Games.RockPaperScissors.play() do
+          ScoreTracker.add_score(10)
+        end
+
+        main(nil)
+
+      "3" ->
+        if Games.Wordle.play() do
+          ScoreTracker.add_score(25)
+        end
+
+        main(nil)
+
+      "score" ->
+        display_score()
+        main(nil)
+
+      "stop" ->
+        IO.puts("Thanks for playing")
     end
-    play_again?()
   end
 end

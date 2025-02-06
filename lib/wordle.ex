@@ -42,20 +42,14 @@ defmodule Games.Wordle do
     ])
   end
 
-  @doc """
-  Asks for a user input and validates the input.
-  """
   @spec user_guess() :: String.t()
   defp user_guess do
-    IO.gets("Please enter a 5 letter word: ")
+    IO.gets("\nPlease enter a 5 letter word: ")
     |> String.trim()
     |> String.downcase()
     |> guess_validation()
   end
 
-  @doc """
-  Checks to make sure the user has entered a 5 letter word.
-  """
   @spec guess_validation(String.t()) :: String.t()
   defp guess_validation(guess) do
     if String.length(guess) != 5 do
@@ -65,16 +59,14 @@ defmodule Games.Wordle do
     end
   end
 
-  @doc """
-  Creates a list of :green, :yellow: :grey for each letter compared to the answer.
-  """
   @spec feedback(String.t(), String.t()) :: [atom()]
   defp feedback(answer, guess) do
     answer =
       answer
       |> String.codepoints()
 
-      answer_pair = answer
+    answer_pair =
+      answer
       |> Enum.with_index()
 
     guess =
@@ -98,11 +90,7 @@ defmodule Games.Wordle do
     |> IO.inspect()
   end
 
-  @doc """
-  Starts the loop to keep asking for a 5-letter word will guesses left run out or
-  user guesses the right word.
-  """
-  @spec play_loop(String.t(), String.t(), integer()) :: any()
+  @spec play_loop(String.t(), String.t(), integer()) :: binary()
   defp play_loop(answer, guess, guesses_left) do
     cond do
       guesses_left > 0 and answer != guess ->
@@ -110,22 +98,23 @@ defmodule Games.Wordle do
         guess = user_guess()
         play_loop(answer, guess, guesses_left - 1)
 
-      guesses_left >= 0 and answer == guess ->
+      guesses_left > 0 and answer == guess ->
         feedback(answer, guess)
+        true
 
-      guesses_left < 0 ->
+      guesses_left <= 0 and answer != guess ->
         IO.puts("Ran out of guesses... The word was #{answer}.")
+        false
     end
   end
 
-    @doc """
+  @doc """
   Starts the Wordle game.
   """
-  @spec play() :: :ok
+  @spec play() :: binary()
   def play do
     answer = word_generator()
     guess = user_guess()
-    guesses_left = 5
-    play_loop(answer, guess, guesses_left)
+    play_loop(answer, guess, 4)
   end
 end
