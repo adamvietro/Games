@@ -10,9 +10,6 @@ defmodule Games do
     Wordle
   """
 
-  @doc """
-  Not sure what to put here...
-  """
   @spec game_validate(String.t()) :: :ok
   defp game_validate(choice) do
     current_games = ["rockpaperscissors", "guessinggame", "wordle"]
@@ -46,7 +43,7 @@ defmodule Games do
   end
 
   @spec play_again?() :: :ok
-  def play_again? do
+  defp play_again? do
     choice = IO.gets("Would you like to play an other game? y/n\n")
     choice = string_normalization(choice)
     choice = again_validate(choice)
